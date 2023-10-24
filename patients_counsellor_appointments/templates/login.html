@@ -1,8 +1,10 @@
 {% extends 'master-withoutlogin.html' %}
 {% load static  %}
 {% block title %}Login{% endblock %}
-{%block script%}
-    
+
+
+
+{% block content %}
 	<script>
 		$(document).ready(function() {
 
@@ -90,24 +92,19 @@
 		});
 
 
-		$("#eye").click(function() {
-			// Get the password input field
-			var passwordInput = $("#password-input");
+		        $("#eye").click(function() {
+            // Get the password input field
+            var passwordInput = $("#password-input");
 
-			// Toggle the input type between password and text
-			if (passwordInput.attr("type") === "password") {
-			passwordInput.attr("type", "text");
-			} else {
-			passwordInput.attr("type", "password");
-			}
-		});
-		});
+            // Toggle the input type between password and text
+            if (passwordInput.attr("type") === "password") {
+                passwordInput.attr("type", "text");
+            } else {
+                passwordInput.attr("type", "password");
+            }
+        });
+	});
 	</script> 
-
-
-{%endblock%}
-
-{% block content %}
 <div class="section-background">
     <div class="login-bgimg-div">
         <img src="{% static "images/counselling_bg1.png" %}" />
@@ -121,7 +118,7 @@
 
 
             <div class="form-div">
-                <form action="" method="POST" id="login_frm" name="login_frm" autocomplete="off">
+                <form action="{% url '/postlogin' %}" method="POST" id="login_frm" name="login_frm" autocomplete="off">
                     {% csrf_token %}     
                     <div class="input-outer-div">
                         

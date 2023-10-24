@@ -52,6 +52,21 @@ def user_login(request):
     else:
         return HttpResponse(render(request, "login.html",context))
 
+@csrf_protect
+def postlogin(request):
+    try:
+        if request.method == 'POST':
+            login_email=request.POST.get('email')
+            login_password=request.POST.get('password')
+        
+            if login_email is not None and login_password is not None:
+                pass
+                
+                
+
+    except Exception as e:
+        return HttpResponseRedirect("login")
+    
 def logout(request):
     context={}
     if 'user_id' in request.session:
