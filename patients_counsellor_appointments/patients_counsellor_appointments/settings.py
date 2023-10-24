@@ -165,6 +165,13 @@ DATABASES = {
 
 AUTH_USER_MODEL = 'authapp.AppUser'
 
+#Scopes of Oauth2 Provider
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'},
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 86400,
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
