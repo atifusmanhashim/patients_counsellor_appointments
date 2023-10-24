@@ -19,12 +19,15 @@ from django.conf import settings
 #URLLibrary Parsing
 import urllib.parse
 
+from .models import (AppAnalytics)
+
 #=========================================== Common Functions ====================================
 #Merge 2 Dictionaries
 def merge_two_dicts(x, y):
     z = x.copy()   # start with keys and values of x
     z.update(y)    # modifies z with keys and values of y
     return z
+
 #Getting Dictionary
 def getList(dict): 
     
@@ -94,6 +97,42 @@ def format_epoch_dtime(sel_time):
         dt=None
     return dt
 
+#=========================================== Pagination ====================================
+#Used for Pagination
+def pagination(request):
+
+    
+    if 'page' in request.data:
+        page = int(request.data.get('page', 1))
+    else:
+        page = 1
+
+    if 'reqRecs' in request.data:
+        reqRecs=int(request.data.get('reqRecs',10))
+    else:
+        reqRecs=10
+
+    startpage=(page-1)*reqRecs
+    endpage=page*reqRecs
+    #================================End of Pagination ===============================
+
+    result={'start':startpage,'end':endpage,'page':page,'reqRecs':reqRecs}
+    return result
+
+#Getting Total Pages
+def get_total_pages (sel_total_records, sel_req_records):
+
+    if sel_total_records > 0 and sel_req_records > 0:
+        total_pages=int(math.ceil(sel_total_records/sel_req_records))
+        if total_pages==0:
+            total_pages=1
+    else:
+        total_pages=0
+
+    return total_pages
+
+#=========================================== End of Pagination ====================================
+
 
 #=========================================== Error Logs ===========================================
 log_dir_path=os.path.join(Path().absolute().parent,'log/error_logs')
@@ -139,4 +178,52 @@ def delete_existing_csv():
     
 
 #=========================================== Error Logs ===========================================
-#=========================================== End of Common Functions ==============================
+#=========================================== End of Common Functions ==============================#=========================================== Analytics =====================================
+#Saving Analytics
+def save_analytics(sel_user,sel_action,request):
+
+    data=request.data
+    app_version = data.get('app_version', None)
+    platform= data.get('platform', None)
+    brand= data.get('brand', None)
+    device= data.get('device_id', None)
+    device_model= data.get('device_model', None)
+    device_ip=get_client_ip(request)
+    
+    if sel_user is not None:
+        analytics=AppAnalytics.objects.create(user=sel_user,
+                                                       search_params=request.data, 
+                                                       action=sel_action,
+                                                       app_version=app_version,
+                                                       platform=platform,
+                                                       brand=brand,
+                                                       device=device,
+                                                       device_model=device_model,
+                                                       device_ip=device_ip)
+
+
+    else:
+        analytics=AppAnalytics.objects.create(search_params=request.data, 
+                                                       action=sel_action,
+                                                       app_version=app_version,
+                                                       platform=platform,
+                                                       brand=brand,
+                                                       device=device,
+                                                       device_model=device_model,
+                                                       device_ip=device_ip)
+
+    return True
+
+# ========================================== URL Parsing ==========================================
+def get_url_query_params(sel_url):
+    if sel_url is not None:
+        parse_url=urllib.parse.urlparse(sel_url)
+        parse_url_query=parse_url.query
+        parse_url_query_params=urllib.parse.parse_qs(parse_url_query)
+        query_params=parse_url_query_params
+    else:
+        query_params=[]
+    return query_params
+# ========================================== End of URL Parsing ==========================================
+
+
