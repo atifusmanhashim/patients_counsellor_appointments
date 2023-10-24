@@ -98,7 +98,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [ 
-            os.path.join(BASE_DIR, 'templates/upload_csv_product_matching')
+            os.path.join(BASE_DIR, 'templates')
         ],        
 
         'APP_DIRS': True,
