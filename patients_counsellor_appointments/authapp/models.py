@@ -24,7 +24,7 @@ class BasicModel(models.Model):
     class Meta:
         abstract = True
 
-class UserRole(models.Model):
+class UserRole(BasicModel):
     def get_role_code():
         new_role_code="UR-"+get_random_string(12)
         return new_role_code  
@@ -80,7 +80,7 @@ class AppUser (AbstractUser):
       constraints = [models.UniqueConstraint(fields=['user_no'], name='unique_user_no')]
 
 
-class LoginAnalytics(models.Model):
+class LoginAnalytics(BasicModel):
 
     action=models.CharField (max_length=50, null=True, default=None, blank=True)   
     user=models.ForeignKey(AppUser, null=True, on_delete=models.CASCADE)
