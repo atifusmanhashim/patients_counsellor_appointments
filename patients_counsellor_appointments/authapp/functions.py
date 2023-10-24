@@ -32,6 +32,7 @@ from appapi.functions import (save_analytics,
 #Using Constant Values
 import appapi.constants as constants
 
+
 #Types for Checking DataTypes
 import types
 
@@ -69,3 +70,170 @@ def get_user(sel_id):
     else:
        sel_user=None 
     return sel_user
+
+# Getthing Users List
+def get_user_list():
+    try:
+        user_list=AppUser.objects.filter(is_active=True).order_by('-id')
+    except AppUser.DoesNotExist:
+        user_list=None
+    return user_list#Getting Authorized User using Token
+def get_auth_user(token):
+    
+    if token is not None: 
+        token=str(token).strip()
+        try:
+            token_instance=AccessToken.objects.get(token=token)
+            try:
+                theuser=AppUser.objects.filter(is_active=True).get(pk=token_instance.user_id)
+                result=theuser
+            except AppUser.DoesNotExist:
+                result=None
+        except AccessToken.DoesNotExist:
+            result=None
+    else:
+       result=None
+    
+    return result
+
+# Account Deactivation
+def user_account_deactivate(sel_user):
+
+    if sel_user is not None:
+        theuser=sel_user
+        if sel_user.is_active==True:
+            sel_user.is_active=False
+            sel_user.save()
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
+#Logut
+def get_logout(token):
+    
+    theuser=get_auth_user(token)
+    instance = AccessToken.objects.filter(user=theuser,token=token)
+    instance.delete()
+    
+    return True
+
+def get_token_expiration():
+    # 'Access Token Expiration' and Scopes
+    expire_seconds = oauth2_settings.user_settings['ACCESS_TOKEN_EXPIRE_SECONDS']
+    
+    expires=timezone.now() + timezone.timedelta(seconds=expire_seconds)
+    
+    result=expires
+    return result
+
+#Getting Scopes from Settings of Oauth2
+def get_token_scopes():
+    scopes = oauth2_settings.user_settings['SCOPES']
+    return scopes
+
+#Getting Access Token
+def get_access_token(seluser):
+    
+    application=get_application_credentials()
+    access_token = AccessToken.objects.create(
+                                                    user=seluser,
+                                                    application=application,
+                                                    token=get_random_string(length=32),
+                                                    expires=get_token_expiration(),
+                                                    scope=get_token_scopes(),
+                                                )
+    result=access_token
+    
+    return result
+
+# Getting New Access Token
+def get_new_access_token(seluser):
+
+    application=get_application_credentials()
+
+    access_token = AccessToken.objects.create(
+                                                    user=seluser,
+                                                    application=application,
+                                                    token=get_random_string(length=32),
+                                                    expires=get_token_expiration(),
+                                                    scope=get_token_scopes(),
+                                                )
+    result=access_token
+
+    return result
+
+#Getting New Refresh Token
+def get_refresh_token(seluser):
+    
+    application=get_application_credentials()
+    access_token=get_access_token(seluser)
+    refresh_token = RefreshToken.objects.create(
+                                                            user=seluser,
+                                                            token=get_random_string(length=32),
+                                                            access_token=access_token,
+                                                            application=application)
+    result=refresh_token
+    return result
+
+def get_new_refresh_token(seluser):
+
+    application=get_application_credentials()
+    access_token=get_new_access_token(seluser)
+    refresh_token = RefreshToken.objects.create(
+                                                            user=seluser,
+                                                            token=get_random_string(length=32),
+                                                            access_token=access_token,
+                                                            application=application)
+    result=refresh_token
+    return result
+
+def get_access_token_details(seltoken):
+
+    if seltoken is not None:
+        try:
+            access_token=AccessToken.objects.get(token=seltoken)
+        except AccessToken.DoesNotExist:
+            access_token=None
+    else:
+        access_token=None
+    return access_token
+
+def get_refresh_token_details(selaccesstoken):
+
+    if selaccesstoken is not None:
+        try:
+            refresh_token=RefreshToken.objects.get(access_token=selaccesstoken)
+        except RefreshToken.DoesNotExist:
+            refresh_token=None
+    else:
+        refresh_token=None
+    return refresh_token
+
+
+#================================================= Email And Contact Checking ================
+def email_exist(sel_email):
+    
+    if sel_email is not None:
+        queryset=AppUser.objects.filter(email=sel_email,is_active=True)
+        if queryset.count() >=1:
+            return True
+        else:
+            return False
+    else:
+        return False
+    
+def contact_exist(sel_contact):
+    
+    if sel_contact is not None:
+        queryset=AppUser.objects.filter(contact_no=sel_contact,is_active=True,contact_no_flag=True)
+        if queryset.count() >=1:
+            return True
+        else:
+            return False
+    else:
+        return False    
+#================================================= End of Email And Contact Checking ================
+

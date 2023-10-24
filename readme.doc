@@ -10,3 +10,8 @@ Query OK, 0 rows affected (0.05 sec)
 
 mysql> flush privileges;
 Query OK, 0 rows affected (0.04 sec)
+
+# Django Admin
+sername: admin
+Email address: admin@test.com
+password=test@123
