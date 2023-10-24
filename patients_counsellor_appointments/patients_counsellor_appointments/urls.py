@@ -24,6 +24,4 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('django-admin/', admin.site.urls),
     path('', include('admin_panel.urls'), name='admin_panel'),
-    
-    # path('', TemplateView.as_view(template_name='login.html'), name='root')
 ]
