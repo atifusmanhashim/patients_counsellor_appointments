@@ -37,21 +37,19 @@ class Patient(BasicModel):
                             default=get_patient_code,
                             unique=True,
                             db_index=True)  
-    patient_name=models.CharField (max_length=300, null=True, default=None, blank=False,db_index=True) 
-    patient_email=models.CharField (max_length=300, null=True, default=None, blank=False,db_index=True,unique=True) 
+    patient_name=models.CharField (max_length=250, null=True, default=None, blank=False,db_index=True) 
+    patient_email=models.CharField (max_length=250, null=True, default=None, blank=False,db_index=True,unique=True) 
     patient_user=models.ForeignKey(AppUser, null=True, on_delete=models.CASCADE)
     
     def __str__(self):
         if self.patient_name is not None and self.user.email is not None:
             return self.patient_name + " ("+self.user.email+")"
 	
-    def (self):
-        return self.action 
     class Meta:
       db_table = 'app_patient'  
       ordering = ['-patient_id']
 
-#Used for Patient Information
+#Used for Counsellor Information
 class Counsellor(BasicModel):
 
     def get_counsellor_code():
@@ -64,8 +62,8 @@ class Counsellor(BasicModel):
                             default=get_counsellor_code,
                             unique=True,
                             db_index=True)  
-    counsellor_name=models.CharField (max_length=300, null=True, default=None, blank=False,db_index=True) 
-    counsellor_email=models.CharField (max_length=300, null=True, default=None, blank=False,db_index=True,unique=True) 
+    counsellor_name=models.CharField (max_length=250, null=True, default=None, blank=False,db_index=True) 
+    counsellor_email=models.CharField (max_length=250, null=True, default=None, blank=False,db_index=True,unique=True) 
     counsellor_user=models.ForeignKey(AppUser, null=True, on_delete=models.CASCADE)
     
     def __str__(self):
@@ -77,3 +75,46 @@ class Counsellor(BasicModel):
       db_table = 'app_counsellor'  
       ordering = ['-counsellor_id']
 
+#Used for Counsellor Information
+class Appointment(BasicModel):
+
+    def get_appointment_code():
+        new_appointment_code="A-"+get_random_string(12)
+        return new_appointment_code 
+    
+    appointment_id=models.AutoField (primary_key=True)
+    appointment_code=models.CharField(max_length=50, null=True,
+                            blank=True,
+                            default=get_appointment_code,
+                            unique=True,
+                            db_index=True)  
+    
+    appointment_date=models.DateTimeField(default=None, blank=True, null=True)
+    appointment_patient=models.ForeignKey(Patient, null=True, on_delete=models.CASCADE)
+    appointment_counsellor=models.ForeignKey(Counsellor, null=True, on_delete=models.CASCADE)
+    
+    
+    def __str__(self):
+        return self.appointment_id
+
+    def counsellor_name(self):
+        
+        if self.appointment_counsellor is not None:
+                return self.appointment_counsellor.counsellor_name + " ("+self.appointment_counsellor.counsellor_email+")"
+        
+        else:
+           return "Nil"     
+          
+
+    def patient_name(self):
+        
+        if self.appointment_patient is not None:
+           return self.appointment_patient.patient_name + " ("+self.appointment_counsellor.counsellor_email+")"	
+        else:
+           return "Nil"     
+
+	
+
+    class Meta:
+      db_table = 'app_appointments'  
+      ordering = ['-appointment_id']

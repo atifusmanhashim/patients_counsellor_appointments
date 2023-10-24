@@ -43,10 +43,16 @@ ALLOWED_HOSTS = ['localhost','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    
+    # For Authentication
     'authapp.apps.AuthappConfig',
     
-    #App Api
+    #App Api and Common Functions
     'appapi.apps.AppapiConfig',
+    
+    # For Patients / Counsellor Appointments Handling
+    'appointmentsapp.apps.AppointmentsappConfig',
+
 
     'django.contrib.admin',
     'django.contrib.auth',
