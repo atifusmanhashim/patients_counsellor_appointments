@@ -1,0 +1,17 @@
+[Unit]
+Description=uWSGI instance to server Grocery Collection project
+After=network.target
+
+[Service]
+User=patients_counsellor_appointments
+Group=webapps
+WorkingDirectory=/webapps/patients_counsellor_appointments/patients_counsellor_appointments
+Environment="PATH=/webapps/patients_counsellor_appointments/bin"
+ExecStart=/webapps/patients_counsellor_appointments/bin/uwsgi --ini /webapps/patients_counsellor_appointments/conf/uwsgi.ini
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
