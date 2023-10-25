@@ -10,10 +10,7 @@ from django.contrib.auth import authenticate
 from django.utils.crypto import get_random_string
 
 #For Using App Models
-from .models import (GroceryAppCustomer, AppUser, GroceryAppCustomer)
-
-#For Using City / Country Model
-from cities_light.models import City, Country
+from .models import (UserRole, AppUser, LoginAnalytics)
 
 import appapi.constants as constants
 

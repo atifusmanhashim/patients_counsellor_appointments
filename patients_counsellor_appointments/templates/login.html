@@ -92,17 +92,17 @@
 		});
 
 
-		        $("#eye").click(function() {
-            // Get the password input field
-            var passwordInput = $("#password-input");
+		$("#eye").click(function() {
+				// Get the password input field
+				var passwordInput = $("#password-input");
 
-            // Toggle the input type between password and text
-            if (passwordInput.attr("type") === "password") {
-                passwordInput.attr("type", "text");
-            } else {
-                passwordInput.attr("type", "password");
-            }
-        });
+				// Toggle the input type between password and text
+				if (passwordInput.attr("type") === "password") {
+					passwordInput.attr("type", "text");
+				} else {
+					passwordInput.attr("type", "password");
+				}
+        	});
 	});
 	</script> 
 <div class="section-background">
@@ -111,14 +111,14 @@
     </div>
     <div class="form-div-outermost">
         <div class=" form-outer-div">
-            <p class="form-heading">Log in to Continue</p>
+            <p class="h5 text-center">Log in to Continue</p>
            
 
 
 
 
             <div class="form-div">
-                <form action="{% url '/postlogin' %}" method="POST" id="login_frm" name="login_frm" autocomplete="off">
+                <form method="POST" id="login_frm" name="login_frm" autocomplete="off">
                     {% csrf_token %}     
                     <div class="input-outer-div">
                         
@@ -142,16 +142,11 @@
                            
                         </div>
                     </div>
-                    <!-- <div class="checkbox-outer-div">
-                    <div class="checkbox-div"><input type="checkbox" /><label>Remember Me</label></div>
-                    <div class="forget-pass">
-                        <a href="#"> Forget Password?</a>
-                    </div>
-                </div> -->
+                   
 
                     <div class="button-div">
                         <button id="login_btn" type="submit" name="login_btn">Log In</button>
-                        <!-- <p>Don’t have an account? <a href="#">Register</a></p> -->
+                       
                     </div>
                 </form>
             </div>

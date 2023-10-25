@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     # For Patients / Counsellor Appointments Handling
     'appointmentsapp.apps.AppointmentsappConfig',
 
-
+     'admin_panel.apps.AdminPanelConfig',
+     
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
