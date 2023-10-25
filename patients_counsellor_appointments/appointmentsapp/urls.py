@@ -9,14 +9,15 @@ urlpatterns = [
     # Patient
     path('create-patient/', views.CreatePatient.as_view(), name='create-patient'),       # For Adding New Patient
     path('patient-list/', views.PatientList.as_view(), name='patient-list'),            # For Patient Listing
-    path('patient-details/', views.PatientDetails.as_view(), name='patient-details'), 
-    path('patient-delete/', views.PatientDelete.as_view(), name='patient-delete'), 
+    path('patient-details/', views.PatientDetails.as_view(), name='patient-details'),   # For Reading PAtient Details
+    path('patient-delete/', views.PatientDelete.as_view(), name='patient-delete'),      # For Deletion of Selected Patient
+    path('patient-update/', views.PatientUpdate.as_view(), name='patient-update'),      # For Update of Selected Patient
     
     # Counsellor
     path('create-counsellor/', views.CreateCounsellor.as_view(), name='create-counsellor'),       # For Adding New Counsellor  
-    path('counsellor-list/', views.CounsellorList.as_view(), name='counsellor-list'), 
-    path('counsellor-details/', views.CounsellorDetails.as_view(), name='counsellor-details'), 
-    path('counsellor-delete/', views.CounsellorDelete.as_view(), name='counsellor-delete'), 
+    path('counsellor-list/', views.CounsellorList.as_view(), name='counsellor-list'),             # for getting active Counsellors
+    path('counsellor-details/', views.CounsellorDetails.as_view(), name='counsellor-details'),    # for getting Counsellor Details
+    path('counsellor-delete/', views.CounsellorDelete.as_view(), name='counsellor-delete'),       # For Removing Counsellor 
 # ============================================Versioning APIs====================================================== 
     
     # Patients

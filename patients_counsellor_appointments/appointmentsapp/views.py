@@ -68,8 +68,8 @@ class CreatePatient(APIView):
                       response={'msg':'success','status':200,'data':mydata}
                       return Response(response, status=status.HTTP_200_OK)   
                 else:
-                      response={'msg':'fail','status':400,'data':required_data,'errors':str(serializer.errors)}
-                      return Response(response, status=400)   
+                    response={'msg':'fail','status':400,'data':required_data,'errors':str(serializer.errors)}
+                    return Response(response, status=400)   
 
 
           
@@ -145,6 +145,54 @@ class PatientDetails(APIView):
                             serializer=PatientSerializer(instance=patient_obj)
                             response={'msg':'success','status':200,'data':serializer.data}
                             return Response(response, status=status.HTTP_200_OK)
+                        else:
+                            response={'msg':'fail','status':400,'errors':'Invalid Counsellor ID'}
+                            return Response(response, status=400)
+                    else:
+                        response={'msg':'fail','status':400,'errors':'Invalid Counsellor ID'}
+                        return Response(response, status=400)
+                else:
+                    response={'msg':'fail','status':400,'errors':'Counsellor ID Not Provided'}
+                    return Response(response, status=400)
+
+   
+        except Exception as e:
+            message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}".format(
+                current_time=current_date_time(),
+                current_url=request.build_absolute_uri(),
+                current_error=repr(e),
+                tb=traceback.format_exc(),
+                current_input=request.data
+            ))
+            
+            write_log_file(message)
+            response={'msg':'fail','status':400,'errors':str(e)}
+            return Response(response, status=400)        
+
+# Patient Details
+class PatientUpdate(APIView):
+    def get(self,request, format='json'):
+        try:
+                action="Patient Update"
+                analytics=save_analytics(action,request)
+                data=request.data
+                
+                if 'patient_id' in data:
+                    if str(data.get('patient_id')).isnumeric():
+                        patient_id=data.get('patient_id')
+                        patient_obj=get_patient(patient_id)
+                        
+                        if patient_obj is not None:
+                              
+                            
+                            serializer=PatientSerializer(instance=patient_obj,data=request.data)
+                            if serializer.is_valid():
+                                serializer.save()
+                                response={'msg':'success','status':200,'data':serializer.data}
+                                return Response(response, status=status.HTTP_200_OK)
+                            else:
+                                response={'msg':'fail','status':400,'data':required_data,'errors':str(serializer.errors)}
+                                return Response(response, status=400)   
                         else:
                             response={'msg':'fail','status':400,'errors':'Invalid Counsellor ID'}
                             return Response(response, status=400)
