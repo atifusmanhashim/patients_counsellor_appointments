@@ -34,7 +34,7 @@ from appapi.functions import (save_analytics,
                               get_total_pages,
                               write_log_file)
 
-from .serializers import (PatientSerializer, CounsellorSerializer, AppointmentSerializer)
+from .serializers import (PatientSerializer, CounsellorSerializer, AppointmentSerializer, AppointmentListtSerializer)
 
 from .functions import (patient_email_exist, 
                         counsellor_email_exist,
@@ -564,7 +564,7 @@ class ActiveAppointments(APIView):
                     
             data_list=queryset[startpage:endpage]
             
-            serializer = AppointmentSerializer(data_list, many=True)
+            serializer = AppointmentListtSerializer(data_list, many=True)
         
             if total_records > 0:
                 total_pages=int(math.ceil(total_records/reqRecs))

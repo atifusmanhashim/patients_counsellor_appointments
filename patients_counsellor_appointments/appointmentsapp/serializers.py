@@ -113,3 +113,36 @@ class AppointmentSerializer(serializers.ModelSerializer):
     def create(self, validated_data): 
         instance = Appointment.objects.create(**validated_data) 
         return instance
+    
+#Serializer for Creating Request Object
+class AppointmentListtSerializer(serializers.ModelSerializer):
+
+    
+         
+    
+   
+    #Patient
+    appointment_patient_name = serializers.CharField(source='appointment_patient.patient_name', read_only=True) 
+    appointment_patient_email= serializers.CharField(source='appointment_patient.patient_email', read_only=True) 
+
+    #Counsellor
+    appointment_counsellor_name = serializers.CharField(source='appointment_counsellor.counsellor_name', read_only=True) 
+    appointment_counsellor_email= serializers.CharField(source='appointment_counsellor.counsellor_email', read_only=True) 
+ 
+
+    class Meta:
+        model=Appointment
+        fields = (
+                  'appointment_id', 
+                  'appointment_code', 
+                  'appointment_date',
+                  'appointment_patient',
+                  'appointment_patient_name',
+                  'appointment_patient_email',
+                  'appointment_counsellor',
+                  'appointment_counsellor_name',
+                  'appointment_counsellor_email',
+                  'is_active',
+                  'create_date',
+                  'modified_date',
+                  'deleted_date') 

@@ -265,3 +265,82 @@ Error:NameError("name 'appointment_date' is not defined")
 NameError: name 'appointment_date' is not defined
 
 Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'appointment_date': ['2023-11-29'], 'counseller_id': ['2']}>
+Error Date/Time:2023-10-25 17:37:53
+URL:http://localhost:8000/appointments/api/active-appointment-list/
+Error:AssertionError('Expected a `date`, but got a `datetime`. Refusing to coerce, as this may mean losing timezone information. Use a custom read-only field and deal with timezone issues explicitly.')
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 575, in get
+    response={'msg':'success','status':200,'total_pages':total_pages,'total_records':total_records,'current_page':page,'records':data_list.count(),'data':serializer.data}
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 515, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/fields.py", line 1298, in to_representation
+    assert not isinstance(value, datetime.datetime), (
+AssertionError: Expected a `date`, but got a `datetime`. Refusing to coerce, as this may mean losing timezone information. Use a custom read-only field and deal with timezone issues explicitly.
+
+Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'appointment_date': ['2023-11-29']}>
+Error Date/Time:2023-10-25 17:42:24
+URL:http://localhost:8000/appointments/api/active-appointment-list/
+Error:AssertionError("It is redundant to specify `source='appointment_code'` on field 'CharField' in serializer 'AppointmentListtSerializer', because it is the same as the field name. Remove the `source` keyword argument.")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 575, in get
+    response={'msg':'success','status':200,'total_pages':total_pages,'total_records':total_records,'current_page':page,'records':data_list.count(),'data':serializer.data}
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 500, in to_representation
+    for field in fields:
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 361, in _readable_fields
+    for field in self.fields.values():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 350, in fields
+    fields[key] = value
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/utils/serializer_helpers.py", line 152, in __setitem__
+    field.bind(field_name=key, parent=self.serializer)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/fields.py", line 378, in bind
+    assert self.source != field_name, (
+AssertionError: It is redundant to specify `source='appointment_code'` on field 'CharField' in serializer 'AppointmentListtSerializer', because it is the same as the field name. Remove the `source` keyword argument.
+
+Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'appointment_date': ['2023-11-29']}>
+Error Date/Time:2023-10-25 17:42:57
+URL:http://localhost:8000/appointments/api/active-appointment-list/
+Error:AssertionError("It is redundant to specify `source='appointment_code'` on field 'CharField' in serializer 'AppointmentListtSerializer', because it is the same as the field name. Remove the `source` keyword argument.")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 575, in get
+    response={'msg':'success','status':200,'total_pages':total_pages,'total_records':total_records,'current_page':page,'records':data_list.count(),'data':serializer.data}
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 500, in to_representation
+    for field in fields:
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 361, in _readable_fields
+    for field in self.fields.values():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 350, in fields
+    fields[key] = value
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/utils/serializer_helpers.py", line 152, in __setitem__
+    field.bind(field_name=key, parent=self.serializer)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/fields.py", line 378, in bind
+    assert self.source != field_name, (
+AssertionError: It is redundant to specify `source='appointment_code'` on field 'CharField' in serializer 'AppointmentListtSerializer', because it is the same as the field name. Remove the `source` keyword argument.
+
+Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'appointment_date': ['2023-11-29']}>
