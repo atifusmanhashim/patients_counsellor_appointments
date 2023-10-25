@@ -22,6 +22,7 @@ urlpatterns = [
 
     # Appointments
     path('create-appointment/', views.CreateAppointment.as_view(), name='create-appointment'),       # For Adding New Patient Appointment 
+    path('active-appointment-list/', views.ActiveAppointments.as_view(), name='active-appointment'),       # For Viewing Active Appointments 
 # ============================================Versioning APIs===============================================================================================
     
     # Patients
@@ -38,6 +39,11 @@ urlpatterns = [
     path('<str:version>/counsellor-details/', views.CounsellorDetails.as_view(), name='counsellor-details'),   #For Viewing Details of Selected Counseller
     path('<str:version>/counsellor-delete/', views.CounsellorDelete.as_view(), name='counsellor-delete'),       #For Deletion of Selected Counsellor
     path('<str:version>/counsellor-update/', views.CounsellorUpdate.as_view(), name='counsellor-update'),       # For Update Counsellor 
+    
+    # Appointments
+    path('<str:version>/create-appointment/', views.CreateAppointment.as_view(), name='create-appointment'),       # For Adding New Patient Appointment 
+    path('<str:version>/active-appointment-list/', views.ActiveAppointments.as_view(), name='active-appointment'),       # For Viewing Active Appointments 
+
 # ============================================End of Versioning APIs====================================================== 
  
 

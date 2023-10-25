@@ -508,7 +508,9 @@ class CreateAppointment(APIView):
     def post(self,request, format='json'):
         try:
             data=request.data
-            
+            action="Create Appointment"
+            analytics=save_analytics(action,request)
+                
             required_data={
                             'appointment_patient':data.get('patient_id'),
                             'appointment_counsellor':data.get('counsellor_id'),
@@ -538,3 +540,52 @@ class CreateAppointment(APIView):
             write_log_file(message)
             response={'msg':'fail','status':400,'errors':str(e)}
             return Response(response, status=400)     
+
+
+# Active Appointments
+class ActiveAppointments(APIView):
+    def get(self,request, format='json'):
+        try:
+            data=request.data
+            action="Active Appointments List"
+            analytics=save_analytics(action,request)
+            #============================== Pagination ============================================
+            req_pagination=pagination(request)
+            startpage=req_pagination['start']
+            endpage=req_pagination['end']
+            page=req_pagination['page']
+            reqRecs=req_pagination['reqRecs']
+            #================================End of Pagination ===============================
+
+            queryset=Appointment.objects.filter(is_active=True).order_by('-appointment_date')
+                
+
+            total_records=queryset.count()
+                    
+            data_list=queryset[startpage:endpage]
+            
+            serializer = AppointmentSerializer(data_list, many=True)
+        
+            if total_records > 0:
+                total_pages=int(math.ceil(total_records/reqRecs))
+                if total_pages==0:
+                    total_pages=1
+            else:
+                total_pages=0
+            response={'msg':'success','status':200,'total_pages':total_pages,'total_records':total_records,'current_page':page,'records':data_list.count(),'data':serializer.data}
+            return Response(response, status=status.HTTP_200_OK)
+            
+           
+          
+        except Exception as e:
+            message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}".format(
+                current_time=current_date_time(),
+                current_url=request.build_absolute_uri(),
+                current_error=repr(e),
+                tb=traceback.format_exc(),
+                current_input=request.data
+            ))
+            
+            write_log_file(message)
+            response={'msg':'fail','status':400,'errors':str(e)}
+            return Response(response, status=400)  
