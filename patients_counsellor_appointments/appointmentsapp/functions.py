@@ -47,3 +47,14 @@ def get_counsellor(sel_counsellor_id):
         sel_counsellor=None
     
     return sel_counsellor
+
+def get_appointment(sel_appointment_id):
+    if sel_appointment_id is not None:
+        try:
+            sel_appointment=Appointment.objects.get(is_active=True,appointment_id=sel_appointment_id)
+        except Appointment.DoesNotExist:
+            sel_appointment=None
+    else:
+        sel_counsellor=None
+    
+    return sel_appointment

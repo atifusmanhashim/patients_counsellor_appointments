@@ -39,7 +39,8 @@ from .serializers import (PatientSerializer, CounsellorSerializer, AppointmentSe
 from .functions import (patient_email_exist, 
                         counsellor_email_exist,
                         get_patient,
-                        get_counsellor
+                        get_counsellor,
+                        get_appointment
                         )
 
 from .models import (Patient,Counsellor,Appointment)
