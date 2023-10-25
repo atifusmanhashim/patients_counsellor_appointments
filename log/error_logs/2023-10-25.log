@@ -353,3 +353,30 @@ Error:NameError("name 'start_date_date' is not defined")
 NameError: name 'start_date_date' is not defined
 
 Cuurent Inputs:<QueryDict: {'start_date': ['2023-10-01'], 'end_date': ['2023-10-31']}>
+Error Date/Time:2023-10-25 18:44:50
+URL:http://localhost:8000/appointments/api/appointment-delete/
+Error:NameError("name 'queryset' is not defined")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 619, in post
+    total_records=queryset.count()
+NameError: name 'queryset' is not defined
+
+Cuurent Inputs:<QueryDict: {'start_date': ['2023-10-01'], 'end_date': ['2023-11-30']}>
+Error Date/Time:2023-10-25 18:45:48
+URL:http://localhost:8000/appointments/api/appointment-delete/
+Error:NameError("name 'queryset' is not defined")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 619, in post
+    total_records=queryset.count()
+NameError: name 'queryset' is not defined
+
+Cuurent Inputs:<QueryDict: {'start_date': ['2023-10-01'], 'end_date': ['2023-11-30']}>
+Error Date/Time:2023-10-25 18:49:49
+URL:http://localhost:8000/appointments/api/appointment-delete/
+Error:NameError("name 'queryset' is not defined")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 616, in post
+    total_records=queryset.count()
+NameError: name 'queryset' is not defined
+
+Cuurent Inputs:<QueryDict: {'start_date': ['2023-10-01'], 'end_date': ['2023-11-30']}>

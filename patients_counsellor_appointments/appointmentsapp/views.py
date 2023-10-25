@@ -542,6 +542,90 @@ class CreateAppointment(APIView):
             response={'msg':'fail','status':400,'errors':str(e)}
             return Response(response, status=400)     
 
+
+# Appointment Details 
+class AppointmentDetails(APIView):
+    def get(self,request, format='json'):
+        try:
+            data=request.data
+            action="Appointment Details"
+            analytics=save_analytics(action,request)
+            
+            if 'appointment_id' in request.data:
+                if str(data.get('appointment_id')).isnumeric():
+                    appointment_id=data.get('appointment_id')
+                    appointment_obj=get_appointment(appointment_id)
+                    if appointment_obj is not None:
+                        serializer = AppointmentListtSerializer(instance=appointment_obj)
+                        response={'msg':'success','status':200,'data':serializer.data}
+                        return Response(response, status=status.HTTP_200_OK)
+                else:
+                    response={'msg':'fail','status':400,'errors':'Invalid Appointment ID'}
+                    return Response(response, status=400)   
+           
+           
+          
+        except Exception as e:
+            message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}".format(
+                current_time=current_date_time(),
+                current_url=request.build_absolute_uri(),
+                current_error=repr(e),
+                tb=traceback.format_exc(),
+                current_input=request.data
+            ))
+            
+            write_log_file(message)
+            response={'msg':'fail','status':400,'errors':str(e)}
+            return Response(response, status=400)  
+
+
+
+
+# Appointment Delete
+class AppointmentDeletion(APIView):
+    def post(self,request, format='json'):
+        try:
+            data=request.data
+            action="Appointment Delete"
+            analytics=save_analytics(action,request)
+            
+            if 'appointment_id' in request.data:
+                if str(data.get('appointment_id')).isnumeric():
+                    appointment_id=data.get('appointment_id')
+                    appointment_obj=get_appointment(appointment_id)
+                    if appointment_obj is not None:
+                        appointment_obj.is_active=False
+                        appointment_obj.deleted_date=current_date_time()
+                        appointment_obj.save()
+                        serializer = AppointmentListtSerializer(instance=appointment_obj)
+                        response={'msg':'success','status':200,'data':serializer.data}
+                        return Response(response, status=status.HTTP_200_OK)
+                else:
+                    response={'msg':'fail','status':400,'errors':'Invalid Appointment ID'}
+                    return Response(response, status=400)   
+            else:
+                response={'msg':'fail','status':400,'errors':'Invalid Appointment ID'}
+                return Response(response, status=400)
+
+           
+          
+        except Exception as e:
+            message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}".format(
+                current_time=current_date_time(),
+                current_url=request.build_absolute_uri(),
+                current_error=repr(e),
+                tb=traceback.format_exc(),
+                current_input=request.data
+            ))
+            
+            write_log_file(message)
+            response={'msg':'fail','status':400,'errors':str(e)}
+            return Response(response, status=400)  
+
+
+
+
+
 # Active Appointments
 class ActiveAppointments(APIView):
     def get(self,request, format='json'):
