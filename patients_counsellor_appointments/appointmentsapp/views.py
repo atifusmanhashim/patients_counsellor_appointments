@@ -265,6 +265,7 @@ class CreateCounsellor(APIView):
             response={'msg':'fail','status':400,'errors':str(e)}
             return Response(response, status=400)        
 
+# Active Counsellors
 class CounsellorList(APIView):
     def get(self,request, format='json'):
         try:
