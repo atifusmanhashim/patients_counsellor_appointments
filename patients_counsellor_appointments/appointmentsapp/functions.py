@@ -1,4 +1,5 @@
 import appapi.constants as constants
+import math
 
 from .models import (Patient,Counsellor,Appointment)
 
@@ -25,14 +26,24 @@ def counsellor_email_exist(sel_email):
     
     return sel_counsellor
 
-def appointment_exist(sel_dt_time, sel_obj, sel_obj_type):
-    if sel_dt_time is not None and sel_obj is not None and sel_obj_type is not None:
+def get_patient(sel_patient_id):
+    if sel_patient_id is not None:
         try:
-            sel_counsellor=Counsellor.objects.get(is_active=True,counsellor_email=sel_email)
+            sel_patient=Patient.objects.get(is_active=True,patient_id=sel_patient_id)
+        except Patient.DoesNotExist:
+            sel_patient=None
+    else:
+        sel_patient=None
+    
+    return sel_patient
+
+def get_counsellor(sel_counsellor_id):
+    if sel_counsellor_id is not None:
+        try:
+            sel_counsellor=Counsellor.objects.get(is_active=True,counsellor_id=sel_counsellor_id)
         except Counsellor.DoesNotExist:
             sel_counsellor=None
     else:
         sel_counsellor=None
     
     return sel_counsellor
-        

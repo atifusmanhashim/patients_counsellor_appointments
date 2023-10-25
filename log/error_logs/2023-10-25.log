@@ -112,3 +112,63 @@ Traceback (most recent call last):
 django.db.utils.IntegrityError: (1048, "Column 'deleted_date' cannot be null")
 
 Cuurent Inputs:<QueryDict: {'patient_name': ['Atif fUsman'], 'patient_email': ['atifusman@test.com'], 'patient_password': ['test@123']}>
+Error Date/Time:2023-10-25 14:06:28
+URL:http://localhost:8000/appointments/api/patient-list/
+Error:NameError("name 'Patient' is not defined")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 101, in get
+    queryset=Patient.objects.filter(is_active=True).order_by('-patient_id')
+NameError: name 'Patient' is not defined
+
+Cuurent Inputs:{}
+Error Date/Time:2023-10-25 14:07:31
+URL:http://localhost:8000/appointments/api/patient-list/
+Error:NameError("name 'math' is not defined")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 112, in get
+    total_pages=int(math.ceil(total_records/reqRecs))
+NameError: name 'math' is not defined
+
+Cuurent Inputs:{}
+Error Date/Time:2023-10-25 14:17:23
+URL:http://localhost:8000/appointments/api/counsellor-list/
+Error:FieldError("Cannot resolve keyword 'patient_id' into field. Choices are: appointment, counsellor_code, counsellor_email, counsellor_id, counsellor_name, counsellor_password, create_date, deleted_date, is_active, modified_date")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 197, in get
+    queryset=Counsellor.objects.filter(is_active=True).order_by('-patient_id')
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/query.py", line 1149, in order_by
+    obj.query.add_ordering(*field_names)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/sql/query.py", line 1993, in add_ordering
+    self.names_to_path(item.split(LOOKUP_SEP), self.model._meta)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/sql/query.py", line 1539, in names_to_path
+    raise FieldError("Cannot resolve keyword '%s' into field. "
+django.core.exceptions.FieldError: Cannot resolve keyword 'patient_id' into field. Choices are: appointment, counsellor_code, counsellor_email, counsellor_id, counsellor_name, counsellor_password, create_date, deleted_date, is_active, modified_date
+
+Cuurent Inputs:<QueryDict: {'page': ['1'], 'reqRecs': ['10']}>
+Error Date/Time:2023-10-25 14:18:38
+URL:http://localhost:8000/appointments/api/counsellor-list/
+Error:KeyError('patient_password')
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 214, in get
+    val.pop('patient_password')
+KeyError: 'patient_password'
+
+Cuurent Inputs:<QueryDict: {'page': ['1'], 'reqRecs': ['10']}>
+Error Date/Time:2023-10-25 15:05:36
+URL:http://localhost:8000/appointments/api/patient-delete/
+Error:AttributeError("'str' object has no attribute 'deleted_date'")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 105, in post
+    patient_id.deleted_date=datetime.datetime.now
+AttributeError: 'str' object has no attribute 'deleted_date'
+
+Cuurent Inputs:<QueryDict: {'patient_id': ['1']}>
+Error Date/Time:2023-10-25 15:06:20
+URL:http://localhost:8000/appointments/api/patient-delete/
+Error:AttributeError("'str' object has no attribute 'deleted_date'")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 105, in post
+    patient_id.deleted_date=current_date_time()
+AttributeError: 'str' object has no attribute 'deleted_date'
+
+Cuurent Inputs:<QueryDict: {'patient_id': ['1']}>

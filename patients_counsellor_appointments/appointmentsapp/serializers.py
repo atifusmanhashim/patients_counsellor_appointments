@@ -48,7 +48,7 @@ class CounsellorSerializer(serializers.ModelSerializer):
 
     def increment_counsellor_code():
 
-        new_counsellor_code='P-'+ get_random_string(12)
+        new_counsellor_code='C-'+ get_random_string(12)
         return new_counsellor_code
     
     counsellor_code=serializers.CharField(default=increment_counsellor_code, 
