@@ -43,7 +43,7 @@ class PatientSerializer(serializers.ModelSerializer):
         model = Patient
         fields = ('__all__')
 
-        
+# Counsellor
 class CounsellorSerializer(serializers.ModelSerializer):
 
     def increment_counsellor_code():
@@ -82,7 +82,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
         return new_appointment_code
          
     appointment_code=serializers.CharField(default=increment_appointment_code, max_length=50) 
-    appointment_date_time=serializers.DateTimeField(source='appointment_date',read_only=True, format=constants.datetime_format)
+    appointment_date=serializers.DateField(required=True,validators=[UniqueValidator(queryset=Appointment.objects.all())])
     
     #Patient
     appointment_patient_name = serializers.CharField(source='appointment_patient.patient_name', read_only=True) 
@@ -95,7 +95,8 @@ class AppointmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Appointment
-        fields = ( 
+        fields = (
+                  'appointment_id', 
                   'appointment_code', 
                   'appointment_date',
                   'appointment_patient',

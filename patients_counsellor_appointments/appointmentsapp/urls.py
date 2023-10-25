@@ -21,8 +21,8 @@ urlpatterns = [
     path('counsellor-update/', views.CounsellorUpdate.as_view(), name='counsellor-update'),       # For Update Counsellor 
 
     # Appointments
-    
-# ============================================Versioning APIs====================================================== 
+    path('create-appointment/', views.CreateAppointment.as_view(), name='create-appointment'),       # For Adding New Patient Appointment 
+# ============================================Versioning APIs===============================================================================================
     
     # Patients
     path('<str:version>/create-patient/', views.CreatePatient.as_view(), name='create-patient'),       # For Adding New Patient

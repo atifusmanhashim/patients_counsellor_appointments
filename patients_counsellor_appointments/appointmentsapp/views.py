@@ -47,6 +47,7 @@ import json
 import math
 import traceback
 
+# ======================================= Start of Patients =============================================
 #Create Patient API
 class CreatePatient(APIView):
     def post(self,request, format='json'):
@@ -272,7 +273,9 @@ class PatientList(APIView):
             write_log_file(message)
             response={'msg':'fail','status':400,'errors':str(e)}
             return Response(response, status=400)        
-  
+
+# ======================================= End of Patients =============================================
+# ======================================= Start of Counsellor =============================================
 #Create Counsellor API
 class CreateCounsellor(APIView):
     def post(self,request, format='json'):
@@ -453,6 +456,7 @@ class CounsellorUpdate(APIView):
             response={'msg':'fail','status':400,'errors':str(e)}
             return Response(response, status=400)                   
 
+
 # Counsellor Details
 class CounsellorDetails(APIView):
     def get(self,request, format='json'):
@@ -493,3 +497,44 @@ class CounsellorDetails(APIView):
             write_log_file(message)
             response={'msg':'fail','status':400,'errors':str(e)}
             return Response(response, status=400)        
+
+
+# ======================================= End of Counsellor =============================================
+
+# ======================================= Start of Appointments =============================================
+
+# Create Appointment for Patient
+class CreateAppointment(APIView):
+    def post(self,request, format='json'):
+        try:
+            data=request.data
+            
+            required_data={
+                            'appointment_patient':data.get('patient_id'),
+                            'appointment_counsellor':data.get('counsellor_id'),
+                            'appointment_date':data.get('appointment_date')
+                        }
+            serializer=AppointmentSerializer(data=required_data)
+                        
+            if serializer.is_valid():
+                appointment=serializer.save()
+                response={'msg':'success','status':200,'data':serializer.data}
+                return Response(response, status=200)
+            else:
+                response={'msg':'fail','status':400,'data':required_data,'errors':str(serializer.errors)}
+                return Response(response, status=400)   
+
+               
+          
+        except Exception as e:
+            message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}".format(
+                current_time=current_date_time(),
+                current_url=request.build_absolute_uri(),
+                current_error=repr(e),
+                tb=traceback.format_exc(),
+                current_input=request.data
+            ))
+            
+            write_log_file(message)
+            response={'msg':'fail','status':400,'errors':str(e)}
+            return Response(response, status=400)     

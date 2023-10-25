@@ -95,20 +95,20 @@ class Appointment(BasicModel):
     
     
     def __str__(self):
-        return self.appointment_id
+        return self.appointment_code
 
-    def counsellor_name(self):
+    def counseller_name(self):
         
         if self.appointment_counsellor is not None:
-            return self.appointment_counsellor.counsellor_name + " ("+self.appointment_counsellor.counsellor_email+")"
+           return self.appointment_counsellor.counsellor_name + " ("+self.appointment_counsellor.counsellor_email+")"	
         else:
-           return "Nil"     
+           return "Nil" 
           
 
     def patient_name(self):
         
         if self.appointment_patient is not None:
-           return self.appointment_patient.patient_name + " ("+self.appointment_counsellor.counsellor_email+")"	
+           return self.appointment_patient.patient_name + " ("+self.appointment_patient.patient_email+")"	
         else:
            return "Nil"     
 

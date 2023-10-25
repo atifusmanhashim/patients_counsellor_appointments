@@ -181,3 +181,87 @@ Error:NameError("name 'required_data' is not defined")
 NameError: name 'required_data' is not defined
 
 Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'patient_name': ['Atif Usman Hashim Hajo Ahmed']}>
+Error Date/Time:2023-10-25 16:34:41
+URL:http://localhost:8000/appointments/api/create-patient-appointment/
+Error:AssertionError("The field 'appointment_date_time' was declared on serializer AppointmentSerializer, but has not been included in the 'fields' option.")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 536, in post
+    if serializer.is_valid():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 220, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 419, in run_validation
+    value = self.to_internal_value(data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 472, in to_internal_value
+    for field in fields:
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 355, in _writable_fields
+    for field in self.fields.values():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 349, in fields
+    for key, value in self.get_fields().items():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 1029, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 1125, in get_field_names
+    assert field_name in fields, (
+AssertionError: The field 'appointment_date_time' was declared on serializer AppointmentSerializer, but has not been included in the 'fields' option.
+
+Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'appointment_date': ['2023-11-29']}>
+Error Date/Time:2023-10-25 16:36:27
+URL:http://localhost:8000/appointments/api/create-patient-appointment/
+Error:AssertionError("It is redundant to specify `source='appointment_date'` on field 'DateTimeField' in serializer 'AppointmentSerializer', because it is the same as the field name. Remove the `source` keyword argument.")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 536, in post
+    if serializer.is_valid():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 220, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 419, in run_validation
+    value = self.to_internal_value(data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 472, in to_internal_value
+    for field in fields:
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 355, in _writable_fields
+    for field in self.fields.values():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 350, in fields
+    fields[key] = value
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/utils/serializer_helpers.py", line 152, in __setitem__
+    field.bind(field_name=key, parent=self.serializer)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/fields.py", line 378, in bind
+    assert self.source != field_name, (
+AssertionError: It is redundant to specify `source='appointment_date'` on field 'DateTimeField' in serializer 'AppointmentSerializer', because it is the same as the field name. Remove the `source` keyword argument.
+
+Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'appointment_date': ['2023-11-29']}>
+Error Date/Time:2023-10-25 16:38:09
+URL:http://localhost:8000/appointments/api/create-patient-appointment/
+Error:AssertionError("It is redundant to specify `source='appointment_date'` on field 'DateField' in serializer 'AppointmentSerializer', because it is the same as the field name. Remove the `source` keyword argument.")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 536, in post
+    if serializer.is_valid():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 220, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 419, in run_validation
+    value = self.to_internal_value(data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 472, in to_internal_value
+    for field in fields:
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 355, in _writable_fields
+    for field in self.fields.values():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 350, in fields
+    fields[key] = value
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/utils/serializer_helpers.py", line 152, in __setitem__
+    field.bind(field_name=key, parent=self.serializer)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/fields.py", line 378, in bind
+    assert self.source != field_name, (
+AssertionError: It is redundant to specify `source='appointment_date'` on field 'DateField' in serializer 'AppointmentSerializer', because it is the same as the field name. Remove the `source` keyword argument.
+
+Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'appointment_date': ['2023-11-29']}>
+Error Date/Time:2023-10-25 17:20:04
+URL:http://localhost:8000/appointments/api/create-appointment/
+Error:NameError("name 'appointment_date' is not defined")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 515, in post
+    'appointment_date':appointment_date
+NameError: name 'appointment_date' is not defined
+
+Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'appointment_date': ['2023-11-29'], 'counseller_id': ['2']}>
