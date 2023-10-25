@@ -172,3 +172,12 @@ Error:AttributeError("'str' object has no attribute 'deleted_date'")
 AttributeError: 'str' object has no attribute 'deleted_date'
 
 Cuurent Inputs:<QueryDict: {'patient_id': ['1']}>
+Error Date/Time:2023-10-25 15:45:54
+URL:http://localhost:8000/appointments/api/patient-update/
+Error:NameError("name 'required_data' is not defined")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 194, in post
+    response={'msg':'fail','status':400,'data':required_data,'errors':str(serializer.errors)}
+NameError: name 'required_data' is not defined
+
+Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'patient_name': ['Atif Usman Hashim Hajo Ahmed']}>

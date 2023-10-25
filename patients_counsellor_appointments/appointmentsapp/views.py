@@ -169,9 +169,9 @@ class PatientDetails(APIView):
             response={'msg':'fail','status':400,'errors':str(e)}
             return Response(response, status=400)        
 
-# Patient Details
+# Patient Update
 class PatientUpdate(APIView):
-    def get(self,request, format='json'):
+    def post(self,request, format='json'):
         try:
                 action="Patient Update"
                 analytics=save_analytics(action,request)
@@ -185,13 +185,13 @@ class PatientUpdate(APIView):
                         if patient_obj is not None:
                               
                             
-                            serializer=PatientSerializer(instance=patient_obj,data=request.data)
+                            serializer=PatientSerializer(instance=patient_obj,data=request.data, partial=True)
                             if serializer.is_valid():
                                 serializer.save()
                                 response={'msg':'success','status':200,'data':serializer.data}
                                 return Response(response, status=status.HTTP_200_OK)
                             else:
-                                response={'msg':'fail','status':400,'data':required_data,'errors':str(serializer.errors)}
+                                response={'msg':'fail','status':400,'data':request.data,'errors':str(serializer.errors)}
                                 return Response(response, status=400)   
                         else:
                             response={'msg':'fail','status':400,'errors':'Invalid Counsellor ID'}
@@ -388,6 +388,50 @@ class CounsellorDelete(APIView):
                         serializer=CounsellorSerializer(instance=counsellor_obj)
                         response={'msg':'success','status':200,'data':serializer.data}
                         return Response(response, status=status.HTTP_200_OK)
+                    else:
+                        response={'msg':'fail','status':400,'errors':'Invalid Counsellor ID'}
+                        return Response(response, status=400)
+                    
+                else:
+                    response={'msg':'fail','status':400,'errors':'Counsellor ID Not Provided'}
+                    return Response(response, status=400)
+                
+        except Exception as e:
+            message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}".format(
+                current_time=current_date_time(),
+                current_url=request.build_absolute_uri(),
+                current_error=repr(e),
+                tb=traceback.format_exc(),
+                current_input=request.data
+            ))
+            
+            write_log_file(message)
+            response={'msg':'fail','status':400,'errors':str(e)}
+            return Response(response, status=400)                   
+
+# Counsellor Update
+class CounsellorUpdate(APIView):
+    def post(self,request, format='json'):
+        try:
+            action="Counsellor Update"
+            analytics=save_analytics(action,request)
+            data=request.data
+                
+            if 'counsellor_id' in data:
+                if str(data.get('counsellor_id')).isnumeric():
+                    counsellor_id=data.get('counsellor_id')
+                    counsellor_obj=get_counsellor(counsellor_id)
+                        
+                    if counsellor_obj is not None:
+                        
+                        serializer=CounsellorSerializer(instance=counsellor_obj,data=request.data,partial=True)
+                        if serializer.is_valid():
+                            serializer.save()
+                            response={'msg':'success','status':200,'data':serializer.data}
+                            return Response(response, status=status.HTTP_200_OK)
+                        else:
+                            response={'msg':'fail','status':400,'data':request.data,'errors':str(serializer.errors)}
+                            return Response(response, status=400)
                     else:
                         response={'msg':'fail','status':400,'errors':'Invalid Counsellor ID'}
                         return Response(response, status=400)
