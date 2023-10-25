@@ -15,3 +15,35 @@ Query OK, 0 rows affected (0.04 sec)
 sername: admin
 Email address: admin@test.com
 password=test@123
+
+Import Postman API Collection
+
+Django App Test.postman_collection.json
+
+1. Installing 3.9.18 using root user
+
+Runnimg Following Commands
+
+Building and installing dependencies
+$ sudo apt install build-essential checkinstall
+$ sudo apt install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev
+Downloading & manually installing required Python version
+$ cd /opt && sudo wget https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tar.xz
+$ sudo tar -xvf Python-3.9.0.tar.xz
+$ cd Python-3.9.18/
+$ sudo ./configure
+$ sudo make && sudo make install
+
+
+Removing downloaded file
+$ sudo rm -rf Python-3.6.6.tar.xz
+Check Python version
+$ python3 -V
+> Python 3.9.18
+Setting up Ubuntu user for our application
+Django itself is very secure framework, I agree. But web applications are still vulnerable. It is good practice to run your application as system users with limited privileges which has limited access to resources on your server. So in this section, we will be adding a new user & permission group to our EC2 instance.
+Adding ubuntu system group ‘groupname’ [webapps in my case] and assign a user ‘username’ [bunny in my case] to this group
+$ sudo groupadd --system webapps
+$ sudo useradd --system --gid webapps --shell /bin/bash --home /webapps/patients_counsellor_appointments patients_counsellor_appointments
+
+
