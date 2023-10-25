@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "b80acba9-8c35-4d62-8d0e-4b7c52505adf",
+		"name": "Django App Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Patient",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patient_name",
+							"value": "Atif fUsman",
+							"type": "text"
+						},
+						{
+							"key": "patient_email",
+							"value": "atifusman4@test.com",
+							"type": "text"
+						},
+						{
+							"key": "patient_password",
+							"value": "test@123",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/create-patient/"
+			},
+			"response": []
+		},
+		{
+			"name": "Active Patients",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "page",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "reqRecs",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/patient-list/"
+			},
+			"response": []
+		},
+		{
+			"name": "Patient Details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patient_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/patient-details/"
+			},
+			"response": []
+		},
+		{
+			"name": "Patient Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patient_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/patient-delete/"
+			},
+			"response": []
+		},
+		{
+			"name": "Patient Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patient_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "patient_name",
+							"value": "Atif Usman Hashim Hajo Ahmed",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/patient-update/"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Counsellor",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "counsellor_name",
+							"value": "Atif fUsman",
+							"type": "text"
+						},
+						{
+							"key": "counsellor_email",
+							"value": "atifusman4@test.com",
+							"type": "text"
+						},
+						{
+							"key": "counsellor_password",
+							"value": "test@123",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/create-counsellor/"
+			},
+			"response": []
+		},
+		{
+			"name": "Active Counsellors",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "page",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "reqRecs",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/counsellor-list/"
+			},
+			"response": []
+		},
+		{
+			"name": "Counsellor Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "counsellor_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "counsellor_name",
+							"value": "Atif Memon",
+							"type": "text"
+						},
+						{
+							"key": "counsellor_email",
+							"value": "atifusman1@test.cocm",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/counsellor-update/"
+			},
+			"response": []
+		},
+		{
+			"name": "Counseller Delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "counsellor_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/counsellor-delete/"
+			},
+			"response": []
+		},
+		{
+			"name": "Counsellor Details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "counsellor_id",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/counsellor-details/"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Patient Appointment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patient_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "appointment_date",
+							"value": "2023-11-29",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/create-appointment/"
+			},
+			"response": []
+		},
+		{
+			"name": "Active Appointments List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "patient_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "appointment_date",
+							"value": "2023-11-29",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/active-appointment-list/"
+			},
+			"response": []
+		},
+		{
+			"name": "Active Appointments List Date Range",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "start_date",
+							"value": "2023-10-01",
+							"type": "text"
+						},
+						{
+							"key": "end_date",
+							"value": "2023-11-30",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/active-appointment-daterange/"
+			},
+			"response": []
+		},
+		{
+			"name": "Appointment Delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "start_date",
+							"value": "2023-10-01",
+							"type": "text"
+						},
+						{
+							"key": "end_date",
+							"value": "2023-11-30",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/appointment-delete/"
+			},
+			"response": []
+		},
+		{
+			"name": "Appointment Details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "appointment_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8000/appointments/api/appointment-details/"
+			},
+			"response": []
+		}
+	]
+}
