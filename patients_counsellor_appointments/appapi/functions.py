@@ -180,7 +180,7 @@ def delete_existing_csv():
 #=========================================== Error Logs ===========================================
 #=========================================== End of Common Functions ==============================#=========================================== Analytics =====================================
 #Saving Analytics
-def save_analytics(sel_user,sel_action,request):
+def save_analytics(sel_action,request):
 
     data=request.data
     app_version = data.get('app_version', None)
@@ -189,21 +189,7 @@ def save_analytics(sel_user,sel_action,request):
     device= data.get('device_id', None)
     device_model= data.get('device_model', None)
     device_ip=get_client_ip(request)
-    
-    if sel_user is not None:
-        analytics=AppAnalytics.objects.create(user=sel_user,
-                                                       search_params=request.data, 
-                                                       action=sel_action,
-                                                       app_version=app_version,
-                                                       platform=platform,
-                                                       brand=brand,
-                                                       device=device,
-                                                       device_model=device_model,
-                                                       device_ip=device_ip)
-
-
-    else:
-        analytics=AppAnalytics.objects.create(search_params=request.data, 
+    analytics=AppAnalytics.objects.create(search_params=request.data, 
                                                        action=sel_action,
                                                        app_version=app_version,
                                                        platform=platform,

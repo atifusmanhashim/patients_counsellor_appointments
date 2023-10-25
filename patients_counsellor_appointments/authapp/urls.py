@@ -1,4 +1,4 @@
-# authapi/urls.py
+# authapp/urls.py
 from django.urls import include, path
 from rest_framework.authtoken.views import obtain_auth_token  # <-- Here
 from django.views.decorators.csrf import csrf_exempt

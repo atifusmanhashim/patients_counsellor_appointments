@@ -1,0 +1,114 @@
+
+Error Date/Time:2023-10-25 12:08:30
+URL:http://localhost:8000/appointments/api/create-patient/
+Error:TypeError("save_analytics() missing 1 required positional argument: 'request'")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 51, in post
+    analytics=save_analytics(action,request)
+TypeError: save_analytics() missing 1 required positional argument: 'request'
+
+Cuurent Inputs:{}
+Error Date/Time:2023-10-25 12:32:50
+URL:http://localhost:8000/appointments/api/create-patient/
+Error:AssertionError("The field 'patient_code' was declared on serializer PatientSerializer, but has not been included in the 'fields' option.")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 60, in post
+    if serializer.is_valid():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 220, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 419, in run_validation
+    value = self.to_internal_value(data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 472, in to_internal_value
+    for field in fields:
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 355, in _writable_fields
+    for field in self.fields.values():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 349, in fields
+    for key, value in self.get_fields().items():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 1029, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 1125, in get_field_names
+    assert field_name in fields, (
+AssertionError: The field 'patient_code' was declared on serializer PatientSerializer, but has not been included in the 'fields' option.
+
+Cuurent Inputs:{}
+Error Date/Time:2023-10-25 12:33:49
+URL:http://localhost:8000/appointments/api/create-patient/
+Error:AssertionError("The field 'patient_code' was declared on serializer PatientSerializer, but has not been included in the 'fields' option.")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 60, in post
+    if serializer.is_valid():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 220, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 419, in run_validation
+    value = self.to_internal_value(data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 472, in to_internal_value
+    for field in fields:
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 355, in _writable_fields
+    for field in self.fields.values():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 349, in fields
+    for key, value in self.get_fields().items():
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 1029, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 1125, in get_field_names
+    assert field_name in fields, (
+AssertionError: The field 'patient_code' was declared on serializer PatientSerializer, but has not been included in the 'fields' option.
+
+Cuurent Inputs:{}
+Error Date/Time:2023-10-25 12:35:54
+URL:http://localhost:8000/appointments/api/create-patient/
+Error:IntegrityError(1048, "Column 'deleted_date' cannot be null")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/MySQLdb/cursors.py", line 206, in execute
+    res = self._query(query)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/MySQLdb/cursors.py", line 319, in _query
+    db.query(q)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/MySQLdb/connections.py", line 259, in query
+    _mysql.connection.query(self, query)
+MySQLdb._exceptions.OperationalError: (1048, "Column 'deleted_date' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 61, in post
+    patient= serializer.save()
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 205, in save
+    self.instance = self.create(validated_data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/rest_framework/serializers.py", line 939, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/query.py", line 453, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/base.py", line 726, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/base.py", line 763, in save_base
+    updated = self._save_table(
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/base.py", line 868, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/base.py", line 906, in _do_insert
+    return manager._insert(
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/query.py", line 1270, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/models/sql/compiler.py", line 1416, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/home/atifusman/Projects/patients_counsellor_appointments/.venv/lib/python3.9/site-packages/django/db/backends/mysql/base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'deleted_date' cannot be null")
+
+Cuurent Inputs:<QueryDict: {'patient_name': ['Atif fUsman'], 'patient_email': ['atifusman@test.com'], 'patient_password': ['test@123']}>

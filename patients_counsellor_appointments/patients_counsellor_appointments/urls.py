@@ -24,4 +24,7 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('django-admin/', admin.site.urls),
     path('admin_panel/', include('admin_panel.urls'), name='admin_panel'),
+    
+    path('appointments/api/', include('appointmentsapp.urls')),
+
 ]

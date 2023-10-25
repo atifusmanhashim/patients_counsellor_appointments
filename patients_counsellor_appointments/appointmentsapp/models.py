@@ -3,7 +3,7 @@ from django.db import models
 
 # Used for Timezone / Datetime
 from django.utils import timezone
-from datetime import datetime
+from datetime import datetime,datetime
 
 #For Getting Random String
 from django.utils.crypto import get_random_string
@@ -18,9 +18,10 @@ import appapi.constants as constants
 #Common Basic Model
 class BasicModel(models.Model):
     is_active = models.BooleanField (null=True, default=True, blank=True) 
-    create_date = models.DateTimeField(default=timezone.now, blank=True)
-    modified_date = models.DateTimeField(default=timezone.now, blank=True) 
-
+    create_date = models.DateTimeField(default=datetime.now, blank=True)
+    modified_date = models.DateTimeField(default=datetime.now, blank=True) 
+    deleted_date = models.DateTimeField(default=None,null=True, blank=True) 
+    
     class Meta:
         abstract = True
 
@@ -38,12 +39,11 @@ class Patient(BasicModel):
                             unique=True,
                             db_index=True)  
     patient_name=models.CharField (max_length=250, null=True, default=None, blank=False,db_index=True) 
-    patient_email=models.CharField (max_length=250, null=True, default=None, blank=False,db_index=True,unique=True) 
-    patient_user=models.ForeignKey(AppUser, null=True, on_delete=models.CASCADE)
+    patient_email=models.CharField (max_length=250, null=False, default=None, blank=False,db_index=True,unique=True) 
+    patient_password=models.CharField (max_length=15, null=False, default=None, blank=False) 
     
     def __str__(self):
-        if self.patient_name is not None and self.user.email is not None:
-            return self.patient_name + " ("+self.user.email+")"
+        return self.patient_name + " ("+self.patient_email+")"
 	
     class Meta:
       db_table = 'app_patient'  
@@ -63,12 +63,12 @@ class Counsellor(BasicModel):
                             unique=True,
                             db_index=True)  
     counsellor_name=models.CharField (max_length=250, null=True, default=None, blank=False,db_index=True) 
-    counsellor_email=models.CharField (max_length=250, null=True, default=None, blank=False,db_index=True,unique=True) 
-    counsellor_user=models.ForeignKey(AppUser, null=True, on_delete=models.CASCADE)
+    counsellor_email=models.CharField (max_length=250, null=False, default=None, blank=False,db_index=True,unique=True) 
+    counsellor_password=models.CharField (max_length=15, null=False, default=None, blank=False) 
+   
     
     def __str__(self):
-        if self.counsellor_name is not None and self.counsellor_user.email is not None:
-            return self.counsellor_name + " ("+self.counsellor_user.email+")"
+        return self.counsellor_name + " ("+self.counsellor_email+")"
 	
 
     class Meta:
@@ -100,8 +100,7 @@ class Appointment(BasicModel):
     def counsellor_name(self):
         
         if self.appointment_counsellor is not None:
-                return self.appointment_counsellor.counsellor_name + " ("+self.appointment_counsellor.counsellor_email+")"
-        
+            return self.appointment_counsellor.counsellor_name + " ("+self.appointment_counsellor.counsellor_email+")"
         else:
            return "Nil"     
           
