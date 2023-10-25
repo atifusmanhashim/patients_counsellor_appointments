@@ -23,6 +23,8 @@ urlpatterns = [
     # Appointments
     path('create-appointment/', views.CreateAppointment.as_view(), name='create-appointment'),       # For Adding New Patient Appointment 
     path('active-appointment-list/', views.ActiveAppointments.as_view(), name='active-appointment'),       # For Viewing Active Appointments 
+    path('active-appointment-daterange/', views.ActiveAppointmentsDateRange.as_view(), name='active-appointment-daterange'),       # For Viewing Active Appointments B/w 2 dates
+
 # ============================================Versioning APIs===============================================================================================
     
     # Patients
@@ -43,7 +45,7 @@ urlpatterns = [
     # Appointments
     path('<str:version>/create-appointment/', views.CreateAppointment.as_view(), name='create-appointment'),       # For Adding New Patient Appointment 
     path('<str:version>/active-appointment-list/', views.ActiveAppointments.as_view(), name='active-appointment'),       # For Viewing Active Appointments 
-
+    path('<str:version>/active-appointment-daterange/', views.ActiveAppointmentsDateRange.as_view(), name='active-appointment-daterange'),       # For Viewing Active Appointments B/w 2 dates
 # ============================================End of Versioning APIs====================================================== 
  
 

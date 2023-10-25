@@ -344,3 +344,12 @@ Error:AssertionError("It is redundant to specify `source='appointment_code'` on 
 AssertionError: It is redundant to specify `source='appointment_code'` on field 'CharField' in serializer 'AppointmentListtSerializer', because it is the same as the field name. Remove the `source` keyword argument.
 
 Cuurent Inputs:<QueryDict: {'patient_id': ['1'], 'appointment_date': ['2023-11-29']}>
+Error Date/Time:2023-10-25 17:55:17
+URL:http://localhost:8000/appointments/api/active-appointment-daterange/
+Error:NameError("name 'start_date_date' is not defined")
+\Traceback (most recent call last):
+  File "/home/atifusman/Projects/patients_counsellor_appointments/patients_counsellor_appointments/appointmentsapp/views.py", line 610, in get
+    search_start_date=start_date_date
+NameError: name 'start_date_date' is not defined
+
+Cuurent Inputs:<QueryDict: {'start_date': ['2023-10-01'], 'end_date': ['2023-10-31']}>

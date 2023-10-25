@@ -541,7 +541,6 @@ class CreateAppointment(APIView):
             response={'msg':'fail','status':400,'errors':str(e)}
             return Response(response, status=400)     
 
-
 # Active Appointments
 class ActiveAppointments(APIView):
     def get(self,request, format='json'):
@@ -557,7 +556,76 @@ class ActiveAppointments(APIView):
             reqRecs=req_pagination['reqRecs']
             #================================End of Pagination ===============================
 
-            queryset=Appointment.objects.filter(is_active=True).order_by('-appointment_date')
+            queryset=Appointment.objects.filter(is_active=True)
+            queryset=queryset.order_by('-appointment_date')
+                
+            total_records=queryset.count()
+                    
+            data_list=queryset[startpage:endpage]
+            
+            serializer = AppointmentListtSerializer(data_list, many=True)
+        
+            if total_records > 0:
+                total_pages=int(math.ceil(total_records/reqRecs))
+                if total_pages==0:
+                    total_pages=1
+            else:
+                total_pages=0
+            response={'msg':'success','status':200,'total_pages':total_pages,'total_records':total_records,'current_page':page,'records':data_list.count(),'data':serializer.data}
+            return Response(response, status=status.HTTP_200_OK)
+            
+           
+          
+        except Exception as e:
+            message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}".format(
+                current_time=current_date_time(),
+                current_url=request.build_absolute_uri(),
+                current_error=repr(e),
+                tb=traceback.format_exc(),
+                current_input=request.data
+            ))
+            
+            write_log_file(message)
+            response={'msg':'fail','status':400,'errors':str(e)}
+            return Response(response, status=400)  
+        
+# Active Appointments
+class ActiveAppointmentsDateRange(APIView):
+    def get(self,request, format='json'):
+        try:
+            data=request.data
+            action="Active Appointments List"
+            analytics=save_analytics(action,request)
+            #============================== Pagination ============================================
+            req_pagination=pagination(request)
+            startpage=req_pagination['start']
+            endpage=req_pagination['end']
+            page=req_pagination['page']
+            reqRecs=req_pagination['reqRecs']
+            #================================End of Pagination ===============================
+
+            if 'start_date' in request.data:
+                start_date=request.data.get('start_date')
+                if validate(start_date)==True:
+                    search_start_date=start_date
+                else:
+                    search_start_date=None
+            else:
+                search_start_date=None
+                
+            if 'end_date' in request.data:    
+                end_date=request.data.get('end_date')
+                if validate(end_date)==True:
+                    search_end_date=end_date
+                else:
+                    search_end_date=None
+            else:
+                search_end_date=None
+
+            queryset=Appointment.objects.filter(is_active=True)
+            if search_start_date is not None and search_end_date is not None:
+                queryset=queryset.filter(appointment_date__gte=search_start_date,appointment_date__lte=search_end_date)
+            queryset=queryset.order_by('-appointment_date')
                 
 
             total_records=queryset.count()

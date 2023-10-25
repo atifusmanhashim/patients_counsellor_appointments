@@ -117,10 +117,6 @@ class AppointmentSerializer(serializers.ModelSerializer):
 #Serializer for Creating Request Object
 class AppointmentListtSerializer(serializers.ModelSerializer):
 
-    
-         
-    
-   
     #Patient
     appointment_patient_name = serializers.CharField(source='appointment_patient.patient_name', read_only=True) 
     appointment_patient_email= serializers.CharField(source='appointment_patient.patient_email', read_only=True) 
