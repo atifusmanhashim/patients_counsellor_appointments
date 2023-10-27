@@ -5,12 +5,13 @@
 
 
 {% block content %}
+<h5>Dashboard</h5>
 <div class="row">
   <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Patients</h5>
-        <p class="card-text">Active: 25  | In-Active: 25 </p>
+        <p class="card-text">Active: {{ active_patients }}  | In-Active: {{ inactive_patients }} | Total: {{ total_patients }} </p>
         <a href="{%url 'admin_panel:patients'%}" class="btn btn-primary">View</a>
       </div>
     </div>
@@ -19,7 +20,7 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Counsellors</h5>
-         <p class="card-text">Active: 25  | In-Active: 25 </p>
+         <p class="card-text">Active: {{ active_counsellors }}  | In-Active: {{ inactive_counsellors }} | Total: {{ total_counsellors }} </p>
         <a href="{%url 'admin_panel:counsellors'%}" class="btn btn-primary">View</a>
       </div>
     </div>
@@ -28,7 +29,7 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Appointments</h5>
-         <p class="card-text">Active: 25  | In-Active: 25 </p>
+         <p class="card-text">Active: {{ active_appointments }}  | In-Active: {{ inactive_appointments }} | Total: {{ total_appointments }} </p>
         <a href="{%url 'admin_panel:appointments'%}" class="btn btn-primary">View</a>
       </div>
     </div>

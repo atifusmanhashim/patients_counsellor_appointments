@@ -1,10 +1,117 @@
 {% extends 'master.html' %}
 {% load static  %}
-{% block title %} Appointments {% endblock %}
+{% block title %} List of Appointments {% endblock %}
 
 
 
 {% block content %}
+<style>
+    p.text-muted {
+        display: none;
+    }
+    div#table_data_filter {
+        display: none;
+    }
+</style>
+<h5>List of Appointments</h5>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2">
+		   <div class="search-box d-inline-block">
+                        <div class="position-relative">
+                                <input type="text" class="form-control" placeholder="Search..." aria-controls="patients-table" id="search-input">
+                              
+                        </div>
+                    </div>
+                   
+                </div>
 
+                <div class="table-responsive">
+			<table class="table" id="table_data">
+				<thead>
+				  <tr>
+				    <th class="text-center" scope="col">#</th>
+				    <th class="text-center" scope="col">Code</th>
+				    <th class="text-center" scope="col">Date</th>
+				    <th class="text-center" scope="col">Patient Name</th>
+                    <th class="text-center" scope="col">Patient Email</th>
+                    <th class="text-center" scope="col">Counsellor Name</th>
+                    <th class="text-center" scope="col">Counsellor Email</th>
+				    <th class="text-center" scope="col">Status</th>
+				    <th class="text-center" scope="col">Creation Date</th>
+				    <th class="text-center" scope="col">Modified Date</th>
+				    <th class="text-center" scope="col">Deleted Date</th>
+				    
+				  </tr>
+				</thead>
+				<tbody>
+				  {% for data in data_list %}
+				  <tr>
+				      <td class="text-center">{{ forloop.counter }}</td>
+				      <td class="text-center"> {{ data.appointment_code }} </td>
+                      <td class="text-center"> {{ data.appointment_date }} </td>
+				      <td class="text-center"> {{ data.appointment_patient_name }} </td>
+				      <td class="text-center"> {{ data.appointment_patient_email }} </td>
+                       <td class="text-center"> {{ data.appointment_counsellor_name }} </td>
+				      <td class="text-center"> {{ data.appointment_Counsellor_email }} </td>
+				      <td class="text-center"> {{ data.is_active }} </td>
+				      <td class="text-center"> {{ data.create_date }} </td>
+				      <td class="text-center"> {{ data.modified_date }} </td>
+				      <td class="text-center"> {{ data.deleted_date }} </td>
+				  </tr>
+				  {% endfor %}
+				</tbody>
+			      </table>
+                </div>
+               
 
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        // Function to perform search
+        function searchTable() {
+            var searchText = $(this).val().toLowerCase(); // Get the search term and convert to lowercase
+            $("table tbody tr").each(function() { // Iterate through each row in the table
+                var rowText = $(this).text().toLowerCase(); // Get the text content of the row and convert to lowercase
+                if (rowText.indexOf(searchText) === -1) { // If the search term is not found in the row
+                    $(this).hide(); // Hide the row
+                } else {
+                    $(this).show(); // Show the row
+                }
+            });
+        }
+
+        var table = $('#table_data').DataTable({
+            "paging": true,
+            "searching": true,
+            "lengthChange": false
+        });
+
+        // Set a placeholder with the bx search icon
+        var searchInput = $('#search-input');
+        // Add Bootstrap's form-control class to the input element
+
+        // Trigger search on keyup event in the search input field
+        searchInput.keyup(function() {
+            table.search($(this).val()).draw();
+        });
+
+    });
+
+</script>
+<script src="{% static "assets/libs/datatables.net/datatables.net.min.js" %}"></script>
+<script src="{% static "assets/libs/datatables.net-bs4/datatables.net-bs4.min.js" %}"></script>
+<script src="{% static "assets/libs/datatables.net-buttons/datatables.net-buttons.min.js" %}"></script>
+<script src="{% static "assets/libs/datatables.net-buttons-bs4/datatables.net-buttons-bs4.min.js" %}"></script>
+<script src="{% static "assets/libs/jszip/jszip.min.js'" %}"></script>
+<script src="{% static "assets/libs/pdfmake/pdfmake.min.js'" %}"></script>
+<script src="{% static "assets/libs/datatables.net-responsive/datatables.net-responsive.min.js" %}"></script>
+<script src="{% static "assets/libs/datatables.net-responsive-bs4/datatables.net-responsive-bs4.min.js" %}"></script>
+
+<!-- end row -->
 {% endblock %}

@@ -15,6 +15,7 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 import logging
 import re
 import json
+import traceback
 
 import appapi.constants as constants
 
@@ -24,7 +25,18 @@ from django.contrib.auth.models import update_last_login
 from authapp.serializers import (AnonymousSerializer, RegisterSerializer, LoginSerializer,
                         UserSerializer, ChangePasswordSerializer, ResetPasswordSerializer)
 
+from appointmentsapp.models import (Patient, Counsellor, Appointment)
+from appointmentsapp.functions import (get_summary,get_patients_list,get_counsellors_list,get_appointments_list)
 
+from appapi.functions import (save_analytics, 
+                              validate,
+                              current_date,
+                              current_date_time,
+                              display_date_time, 
+                              get_client_ip, 
+                              pagination,
+                              get_total_pages,
+                              write_log_file)
 # Create your views here.
 
 @csrf_exempt
@@ -41,9 +53,21 @@ def dashboard(request):
     if 'user_id' in request.session:
         global userId
         userId = str(request.session['user_id'])
+        summary=get_summary()
         context={
-    		'user_id':userId
+    		'user_id':userId,
+            'summary':summary,
+            'active_patients':summary['patients']['active'],
+            'inactive_patients':summary['patients']['inactive'],
+            'total_patients':summary['patients']['total'],
+            'active_counsellors':summary['counsellors']['active'],
+            'inactive_counsellors':summary['counsellors']['inactive'],
+            'total_counsellors':summary['counsellors']['total'],
+            'active_appointments':summary['appointments']['active'],
+            'inactive_appointments':summary['appointments']['inactive'],
+            'total_appointments':summary['appointments']['total'],
     	}
+        print(context)
         return HttpResponse(template.render(context, request))
     else:
         return HttpResponseRedirect("login")
@@ -117,8 +141,10 @@ def patients(request):
         if 'user_id' in request.session:
             global userId
             userId = str(request.session['user_id'])
+            
             context={
-                'user_id':userId
+                'user_id':userId,
+                'data_list':get_patients_list()
             }
             return HttpResponse(template.render(context, request))
         else:
@@ -150,7 +176,8 @@ def counsellors(request):
             global userId
             userId = str(request.session['user_id'])
             context={
-                'user_id':userId
+                'user_id':userId,
+                'data_list':get_counsellors_list()
             }
             return HttpResponse(template.render(context, request))
         else:
@@ -181,7 +208,8 @@ def appointments(request):
             global userId
             userId = str(request.session['user_id'])
             context={
-                'user_id':userId
+                'user_id':userId,
+                'data_list':get_appointments_list()
             }
             return HttpResponse(template.render(context, request))
         else:
