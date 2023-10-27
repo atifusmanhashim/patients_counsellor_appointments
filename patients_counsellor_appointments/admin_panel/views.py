@@ -115,15 +115,15 @@ def user_login(request):
                 else:
                     context['message_error']="User is not active"
                     # messages.error(request, "User is not active") 
-                    return HttpResponseRedirect(reverse("login"))
+                    return HttpResponseRedirect('admin_panel:login')
             else:
                 context['message_error']="Wrong Username or Password!"
                 # messages.error(request, "Wrong Username or Password!") 
-                return HttpResponseRedirect(reverse("login"))
+                return HttpResponseRedirect('admin_panel:login')
         else:
             context['message_error']="Username or Password not provided for login!"
             # messages.info(request, "Username or Password not provided for login!") 
-            return HttpResponseRedirect(reverse("login"))
+            return HttpResponseRedirect('admin_panel:login')
     context = {
         'user_id':'', 
     }
@@ -148,7 +148,7 @@ def patients(request):
             }
             return HttpResponse(template.render(context, request))
         else:
-            return HttpResponseRedirect(reverse("login"))
+            return HttpResponseRedirect('admin_panel:login')
   
     except Exception as e:
         message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}\nUser:{current_user}".format(
@@ -181,7 +181,7 @@ def counsellors(request):
             }
             return HttpResponse(template.render(context, request))
         else:
-            return HttpResponseRedirect(reverse("login"))
+            return HttpResponseRedirect('admin_panel:login')
   
     except Exception as e:
         message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}\nUser:{current_user}".format(
@@ -213,7 +213,7 @@ def appointments(request):
             }
             return HttpResponse(template.render(context, request))
         else:
-            return HttpResponseRedirect(reverse("login"))
+            return HttpResponseRedirect('admin_panel:login')
   
     except Exception as e:
         message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}\nUser:{current_user}".format(
