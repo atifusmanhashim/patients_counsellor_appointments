@@ -90,7 +90,7 @@ At this point, we have successfully set up our project. Now we need to run some 
 Creation of Django Admin
 
 # Django Admin
-sername: admin
+username: admin
 Email address: admin@test.com
 password=test@123
 

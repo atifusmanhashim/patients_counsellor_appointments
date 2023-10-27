@@ -34,7 +34,7 @@ def index(request):
    else:
         return HttpResponseRedirect("login")
 
-@csrf_exempt
+@csrf_protect
 def dashboard(request):
     context={}
     template = loader.get_template('dashboard.html')
@@ -46,7 +46,7 @@ def dashboard(request):
     	}
         return HttpResponse(template.render(context, request))
     else:
-        return HttpResponseRedirect(reverse("login"))
+        return HttpResponseRedirect("login")
 
 @csrf_protect
 def user_login(request):
@@ -54,17 +54,19 @@ def user_login(request):
     template = loader.get_template('login.html') 
     if request.method == 'GET':
         if 'user_id' in request.session:
-            return HttpResponseRedirect(reverse("user:dashboard"))
+            return HttpResponseRedirect("dashboard")
 
     if request.method == 'POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
         if username is not None and password is not None:
-            user = authenticate(username=username, password=password)
+            user=authenticate(username=username,password=password)
+            
+            
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    request.session.set_expiry(86400) #sets the exp. value of the session 
+                    request.session.set_expiry(constants.session_expiry_time) #sets the exp. value of the session 
                     update_last_login(None, user)
                     username=user.username
                     user_id=user.id
@@ -81,22 +83,23 @@ def user_login(request):
                     request.session["user_email"]=email
 
                     context={
-                        'user_name':name,
-                        'user_email':email
-                    }
-                    return HttpResponseRedirect(reverse("user:dashboard"))
+                            'user_name':name,
+                            'user_email':email
+                        }
+                    return HttpResponseRedirect("dashboard")
+               
                 else:
                     context['message_error']="User is not active"
                     # messages.error(request, "User is not active") 
-                    return HttpResponseRedirect(reverse("user:login"))
+                    return HttpResponseRedirect(reverse("login"))
             else:
                 context['message_error']="Wrong Username or Password!"
                 # messages.error(request, "Wrong Username or Password!") 
-                return HttpResponseRedirect(reverse("user:login"))
+                return HttpResponseRedirect(reverse("login"))
         else:
             context['message_error']="Username or Password not provided for login!"
             # messages.info(request, "Username or Password not provided for login!") 
-            return HttpResponseRedirect(reverse("user:login"))
+            return HttpResponseRedirect(reverse("login"))
     context = {
         'user_id':'', 
     }
@@ -198,7 +201,8 @@ def appointments(request):
         write_log_file(message)
         context['error_msg']="Something Went Wrong"
         # context['error_msg']=traceback.format_exc()
-        return(render(request, 'error.html',context))          
+        return(render(request, 'error.html',context))    
+          
 # Logout    
 def logout(request):
     try:
@@ -206,7 +210,7 @@ def logout(request):
         if 'user_id' in request.session:
             del request.session['user_id']
         context['message_success']="You are logged out"
-        return HttpResponseRedirect("login/")
+        return HttpResponseRedirect("admin_panel:login")
     except Exception as e:
         message=("Error Date/Time:{current_time}\nURL:{current_url}\nError:{current_error}\n\{tb}\nCuurent Inputs:{current_input}\nUser:{current_user}".format(
                     current_time=current_date_time(),
