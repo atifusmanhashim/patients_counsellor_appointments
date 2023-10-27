@@ -31,6 +31,39 @@ Removing Python 3.9.18.tar.xz
 	
 Installation of MySQL and Creation of requuired Database
 
+
+
+Installation of Python 3.9
+
+Execute the following Commands in sequence order using root user
+
+Creation of “opt” directory and get Python 3.9.0 from https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tar.xz
+
+cd /opt && sudo wget https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tar.xz
+
+Unzip Python-3.9.18.tar.xz and configure Python 3.9.18
+
+	sudo tar -xvf Python-3.9.18.tar.xz
+	
+	cd Python-3.9.18/
+
+	sudo ./configure
+
+	sudo make && sudo make install
+	
+Removing Python 3.9.18.tar.xz
+	
+	sudo rm -rf Python-3.9.18.tar.xz
+
+	Check Python version
+
+	python3 -V
+
+	Python 3.9.18
+
+	
+Installation of MySQL and Creation of requuired Database
+
 # Database and User Creation with privileges 
 mysql> create database patients_counsellor_appointments;
 Query OK, 1 row affected (0.03 sec)
@@ -94,109 +127,34 @@ sername: admin
 Email address: admin@test.com
 password=test@123
 
+Import Postman API Collection
 
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ python manage.py collectstatic
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ python manage.py runserver 0.0.0.0:8000
-Setting up the uWSGI Application Server
-Now that we’ve got our project set up and ready to go, we can configure uWSGI to serve our app to the web instead of the lightweight development server provided by Django.
-If you’re thinking of running the runserver command on a screen, drop it. The dev server with Django is terribly lightweight, highly insecure, and not scalable.
-You can install uWSGI either in virtualenv or globally and configure it accordingly.
-In this tutorial, we’ll be installing uWSGI in virtualenv. Before we can install uWSGI, we need the Python development files that the software relies on.
-$ sudo apt-get install python3-dev
-$ sudo su - patients_counsellor_appointments 
-patients_counsellor_appointments @ip-server-ip:~$ source bin/activate
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~ sudo apt-get install libpcre3 libpcre3-dev
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ pip install uwsgi
+Django App Test.postman_collection.json
 
-Let’s run the server using uWSGI. This command does the same thing a manage.py runserver would do. You need to replace values accordingly to successfully test with this command.
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ uwsgi --http :8000 --home <path-to-virtualenv> --chdir <path-to-manage.py-dir> -w patients_counsellor_appointments .wsgi
- 
-Example of generating uwsgi.sock through command:
-uwsgi --http :8000 --home /webapps/patients_counsellor_appointments  --chdir /webapps/patients_counsellor_appointments /patients_counsellor_appointments / -w patients_counsellor_appointments .wsgi
- 
-Creating uWSGI configuration file
-Running uWSGI from the command line is only useful for testing. For actual deployment, we will create a .ini file somewhere in our system user directory. This file will contain all the configuration for handling a heavy request load and can be tweaked accordingly.
-Later in this tutorial, we will run uWSGI behind NGINX. NGINX is highly compatible with uWSGI and has built-in support for interacting with uWSGI.
-Create a directory conf in your system user directory where you will store uwsgi.ini
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ mkdir conf
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ cd conf
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ vi uwsgi.ini
+1. Installing 3.9.18 using root user
 
-Although I have created uwsgi.ini file in conf folder inside project folder you just need to execute file from conf folder
+Runnimg Following Commands
+
+Building and installing dependencies
+$ sudo apt install build-essential checkinstall
+$ sudo apt install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev
+Downloading & manually installing required Python version
+$ cd /opt && sudo wget https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tar.xz
+$ sudo tar -xvf Python-3.9.0.tar.xz
+$ cd Python-3.9.18/
+$ sudo ./configure
+$ sudo make && sudo make install
 
 
-I am trying to make everything easy with clear explanations. Cross check paths, directory name, and other inputs that you are required to replace.
-We need to create the log file and run directory where our socket file will be created, that we just mentioned in our uwsgi.ini:
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ mkdir log
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ mkdir run
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ touch log/uwsgi.log
-Make sure to change permissions for these two so that every group or user can write or execute files in these directories:
-$ sudo chmod 777 /webapps/patients_counsellor_appointments /run
-$ sudo chmod 777 /webapps/patients_counsellor_appointments /log
- 
-Example: 
-$ sudo chmod 777 /webapps/patients_counsellor_appointments /run
- 
-$ sudo chmod 777 /webapps/patients_counsellor_appointments /log
-Now let’s try running the server using uwsgi.ini that we just created.
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ uwsgi --ini /webapps/patients_counsellor_appointments/conf/uwsgi.ini
-Example: 
-(patients_counsellor_appointments )patients_counsellor_appointments @ip-server-ip:~$ uwsgi --ini /webapps/patients_counsellor_appointments /conf/uwsgi.ini
-
-If everything up until now is setup correctly, then it should be running. If not, then you need to go back to check for anything you missed (like the path/project name, etc).
-To check any uswgi log you can cat or tail uwsgi.log:
-(patients_counsellor_appointments)patients_counsellor_appointments@ip-172-31-5-231:~$ tail log/uwsgi.log
-
-Create a systemd Unit File for uWSGI
-At this point if everything is cool, you can even run this command in screen and detach it — but again, this is not a good practice at all. Instead we will create a system service and let systemd (Ubuntu’s service manager) take care of it.
-Switch back to sudo user
-I have also created patients_counsellor_appointments.service contained in uwsgi-service folder inside project directory. You just need to copy paste all text from file and save it after creating file in /etc/systemd folder 
-$ sudo nano /etc/systemd/system/patients_counsellor_appointments.service
-
-After you save the above file and close it, you can run following commands:
-Reload systemctl daemon to reload systemd manager configuration and recreate the entire dependency tree
-$ sudo systemctl daemon-reload
-Enable uwsgi service to start on system reboot
-$ sudo systemctl enable patients_counsellor_appointments
-Start uwsgi service
-$ sudo service patients_counsellor_appointments start
-Restart uwsgi service
-$ sudo service patients_counsellor_appointments restart
-Check uwsgi service status
-$ sudo service patients_counsellor_appointments status
-
-Take a deep breath here if everything ran smoothly. We just finished setting up most hectic part of this tutorial, so you should be proud.
-Next we will setup NGINX, and then we’ll be done! I know this is taking a bit of time, but believe me — once done, you will be as happy as I will be after publishing this tutorial.
-Setting Up NGINX on server for uWSGI
-NGINX is a lightweight server, and we’ll use it as a reverse proxy.
-We could let uWSGI run directly on port 80, but NGINX has a lot more benefits which makes it desirable. Also NGINX natively includes support for uWSGI.
-Enough talk, let’s install NGINX on our instance
-$ sudo apt-get install nginx
-
-Now when you go to http://your-public-ip-or-domain-name, you will see a NGINX welcome page. This is because NGINX is listening to port 80 according to its default configuration.
-NGINX has two directories, sites-available and sites-enabled, that need our attention. sites-available stores all conf files for all available sites on that particular instance. sites-enabled stores the symbolic link for each enabled site to the sites-available directory.
-By default, there is only one conf file named default that has basic setup for NGINX. You can either modify it or create a new one. In our case, I am going to delete it:
-$ sudo rm -rf /etc/nginx/sites-available/default
-$ sudo rm -rf /etc/nginx/sites-enabled/default
-Let’s create our nginx-uwsgi.conf file to connect the browser request to the uwsgi server we are running in site-available:
-I have also created this file contained inside project directory / nginx-uwsgi you just need to copy file in /etc/nginx/sites-available folder
-
-Create symbolic link into sites-enabled directory for same
-$ sudo ln -s /etc/nginx/sites-available/nginx-uwsgi.conf /etc/nginx/sites-enabled/nginx-uwsgi.conf
-That’s all, we’re almost there, about to finish up…
-Reload systemctl daemon
-$ sudo systemctl daemon-reload
-Enable nginx service on system reboot
-$ sudo systemctl enable nginx
-Start Nginx service
-$ sudo service nginx start
-Test Nginx. It should return OK, Successful as a part of the result.
-$ sudo nginx -t
-
-Configure HTTPS for your website
-Setting up HTTPS requires us to create an SSL certificate, get it signed by a relevant authority, install it on our server, and then configure NGINX to serve up requests only on HTTPS, while redirecting all HTTP requests to HTTPS. Fortunately, this is made easy with a service like LetsEncrypt and their tool certbot. Instructions: https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx
-
-Congratualations: Configuration is complete
-
+Removing downloaded file
+$ sudo rm -rf Python-3.6.6.tar.xz
+Check Python version
+$ python3 -V
+> Python 3.9.18
+Setting up Ubuntu user for our application
+Django itself is very secure framework, I agree. But web applications are still vulnerable. It is good practice to run your application as system users with limited privileges which has limited access to resources on your server. So in this section, we will be adding a new user & permission group to our EC2 instance.
+Adding ubuntu system group ‘groupname’ [webapps in my case] and assign a user ‘username’ [bunny in my case] to this group
+$ sudo groupadd --system webapps
+$ sudo useradd --system --gid webapps --shell /bin/bash --home /webapps/patients_counsellor_appointments patients_counsellor_appointments
 
 
